@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a class="text-xl font-bold text-gray-800 hover:text-gray-700" href="#">Bolome Agency</a>
+                </div>
+                <nav class="flex items-center">
+                    <a class="text-gray-800 hover:text-gray-600 py-2 px-4" href="{% url 'home' %}">Home</a>
+                    <a class="text-gray-800 hover:text-gray-600 py-2 px-4" href="{% url 'login' %}">Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-3xl mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-6">Product Management</h1>
+        <a href="{% url 'add_product' %}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 inline-block">Add Product</a>
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="border border-gray-300 px-4 py-2">S.No</th>
+                    <th class="border border-gray-300 px-4 py-2">Product Name</th>
+                    <th class="border border-gray-300 px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">{{ forloop.counter }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ product.name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <form action="{% url 'remove_product' product.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Logout link -->
+        <a href="{% url 'logout' %}" class="text-red-500 mt-4 block">Logout</a>
+    </div>
+    
+</body>
+</html>

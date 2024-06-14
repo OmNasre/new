@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+</head>
+
+<body class="bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a class="text-xl font-bold text-gray-800 hover:text-gray-700" href="#">Bolome Agency</a>
+                </div>
+                <nav class="flex items-center">
+                    <a class="text-gray-800 hover:text-gray-600 py-2 px-4" href="{% url 'home' %}">Home</a>
+                    <a class="text-gray-800 hover:text-gray-600 py-2 px-4" href="{% url 'login' %}">Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="text-gray-600 body-font overflow-hidden">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                <img alt="{{ product.name }}" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{ product.image.url }}">
+                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ product.name }}</h1>
+                    <div class="flex mb-4">
+                        <span class="flex items-center">
+                            <!-- Add product rating or reviews here -->
+                        </span>
+                    </div>
+                    <p class="leading-relaxed">{{ product.description }}</p>
+                    <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+                        <!-- Add additional product details here -->
+                    </div>
+                    <div class="flex">
+                        <span class="title-font font-medium text-2xl text-gray-900">Rs. {{ product.price }}</span>
+                        <a href="{% url 'contact' product.id %}" class="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

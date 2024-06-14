@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- {% load static %} -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a class="text-xl font-bold text-gray-800 hover:text-gray-700" href="#">Bolome Agency</a>
+                </div>
+                <nav class="flex items-center">
+                    <a class="text-gray-800 hover:text-gray-600 py-2 px-4" href="{% url 'home' %}">Home</a>
+                    <a class="text-gray-800 hover:text-gray-600 py-2 px-4" href="{% url 'login' %}">Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Listing Section -->
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                {% for product in products %}
+                <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+                    <div class="border border-black p-4 rounded-lg">
+                        <a href="{% url 'product_details' product.id %}" class="block relative h-48 rounded overflow-hidden">
+                            <img alt="{{ product.name }}" class="object-cover object-center w-full h-full block" src="{{ product.image.url }}">
+                        </a>
+                        <div class="mt-4">
+                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ product.category }}</h3>
+                            <h2 class="text-gray-900 title-font text-lg font-medium">{{ product.name }}</h2>
+                            <p class="mt-1">Rs. {{ product.price }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+   
+</body>
+</html>
